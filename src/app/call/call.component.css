@@ -1,0 +1,46 @@
+.login {
+    margin: 20px;
+}
+
+.call-container {
+    margin: 20px;
+}
+
+.videos video {
+    width: 300px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+
+.chat {
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.message {
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+video {
+    aspect-ratio: 16 / 9;
+    max-height: 300px;
+    object-fit: cover;
+    border: 2px solid #dee2e6;
+    transition: transform 0.3s ease;
+}
+
+video:hover {
+    transform: scale(1.01);
+}
+
+input:focus,
+button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+.chat-messages {
+    scroll-behavior: smooth;
+}

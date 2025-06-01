@@ -1,0 +1,54 @@
+<div *ngIf="!connected" class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow-lg text-center" style="min-width: 320px; max-width: 400px;">
+        <h4 class="mb-3 text-primary">🎥 Rejoindre l’appel</h4>
+        <input [(ngModel)]="username" placeholder="Entrez votre pseudo" class="form-control mb-3 shadow-sm" />
+        <button (click)="login()" class="btn btn-success shadow-sm">Se connecter</button>
+    </div>
+</div>
+
+<div *ngIf="connected" class="container py-4 animate__animated animate__fadeIn">
+    <h3 class="text-center mb-4 text-success">Bienvenue <strong>{{ username }}</strong></h3>
+
+    <div class="row mb-4 text-center g-4">
+        <div class="col-md-6">
+            <h5 class="text-info">🎬 Votre caméra</h5>
+            <video #localVideo autoplay muted playsinline class="rounded border shadow w-100 bg-dark"></video>
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-danger">🎥 Caméra distante</h5>
+            <video #remoteVideo autoplay playsinline class="rounded border shadow w-100 bg-dark"></video>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <input [(ngModel)]="remoteSocketId" class="form-control d-inline-block w-50 shadow-sm"
+            placeholder="ID utilisateur à appeler" />
+        <button (click)="callUser()" class="btn btn-warning ms-2 shadow-sm">📞 Appeler</button>
+    </div>
+
+    <div class="chat card mx-auto shadow" style="max-width: 600px;">
+        <div class="card-body bg-light rounded">
+            <h5 class="card-title text-primary">💬 Chat</h5>
+            <div class="chat-messages mb-3 p-2 bg-white rounded" style="max-height: 200px; overflow-y: auto;">
+                <div *ngFor="let msg of messages">
+                    <div *ngIf="msg.type === 'system'"
+                        class="alert alert-info p-2 mb-2 animate__animated animate__fadeInUp">
+                        {{ msg.content }}
+                    </div>
+                    <div *ngIf="msg.type === 'me'"
+                        class="alert alert-primary p-2 mb-2 animate__animated animate__fadeInUp">
+                        Moi: {{ msg.content }}
+                    </div>
+                    <div *ngIf="msg.type === 'user'"
+                        class="alert alert-secondary p-2 mb-2 animate__animated animate__fadeInUp">
+                        De {{ msg.from }}: {{ msg.content }}
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input [(ngModel)]="newMessage" class="form-control shadow-sm" placeholder="Tapez un message" />
+                <button (click)="sendMessage()" class="btn btn-primary shadow-sm">Envoyer</button>
+            </div>
+        </div>
+    </div>
+</div>
